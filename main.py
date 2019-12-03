@@ -48,8 +48,9 @@ def get_event_info(event):
 
     # LINEユーザー名の取得
     user_id = event.source.user_id
+    room_id = event.source.group_id
     try:
-        user_name = line_bot_api.get_profile(user_id).display_name
+        user_name = line_bot_api.get_room_member_profile(room_id, user_id).display_name
     except LineBotApiError as e:
         user_name = "Unknown"
 
