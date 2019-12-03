@@ -48,9 +48,8 @@ def get_event_info(event):
 
     # LINEユーザー名の取得
     user_id = event.source.user_id
-    room_id = event.source.group_id
     try:
-        user_name = line_bot_api.get_room_member_profile(room_id, user_id).display_name
+        user_name = line_bot_api.get_profile(user_id).display_name
     except LineBotApiError as e:
         user_name = "Unknown"
 
@@ -139,7 +138,7 @@ def handle_sticker_message(event):
     # slack側に投稿するメッセージの加工
     send_msg = "[bot-line] {user_name}さんがスタンプを送信しました．\n".format(user_name=user_name) \
                + "package_id: {package_id}\n".format(package_id=package_id) \
-               + "sticker_id: {sticker_id}\n".format(sticker_id=sticker_id)
+               + "sticker_id: {sticker_id}\n".format(sticker_id=sticker_id) 
 
     # メッセージの送信
     slack_info.notify(text=send_msg)
