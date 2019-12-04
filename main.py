@@ -51,7 +51,7 @@ def get_event_info(event):
     try:
         user_name = line_bot_api.get_profile(user_id).display_name
     except LineBotApiError as e:
-        user_name = "Unknown"
+        user_name = event.source.user_id
 
     # トーク情報の取得
     if event.source.type == "user":
