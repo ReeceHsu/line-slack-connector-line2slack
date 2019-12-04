@@ -83,7 +83,7 @@ def handle_text_message(event):
 
     # slack側に投稿するメッセージの加工
     send_msg = " {user_name}說\n".format(user_name=user_name) \
-               + "{msg}\n".format(msg=event.message.text)
+               + "{msg}\n".format(msg=event.message.text) 
 
     # メッセージの送信
     slack_info.notify(text=send_msg)
