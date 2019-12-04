@@ -22,6 +22,15 @@ handler = WebhookHandler(CHANNEL_SECRET)
 memberlist = {"U386dbda4eb15a5a528c369f2efb19cbc": "Jukuan", 
               "U6e7ed40306e372bf9fbf8b9ff246247b": "Karen Lai"}
 
+@app.route("/slacepush", methods=['POST'])
+def slack_push():
+    if request.method == 'POST':
+    print request.form["text"] if request.form["text"] == '<hoge>':
+    try:
+      line_bot_api.push_message('##user id##', TextSendMessage(text='hogehoge'))
+      return "great"
+    except LineBotApiError as e:
+      return e
 
 @app.route("/callback", methods=['POST'])
 def callback():
