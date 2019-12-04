@@ -19,7 +19,7 @@ POST_CHANEL_ID = os.environ["SLACK_POST_CHANEL_ID"]
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
-mydict = {"U386dbda4eb15a5a528c369f2efb19cbc":"Jukuan",}
+memberlist = {"U386dbda4eb15a5a528c369f2efb19cbc":"Jukuan"}
 
 
 @app.route("/callback", methods=['POST'])
@@ -53,8 +53,8 @@ def get_event_info(event):
     try:
         user_name = line_bot_api.get_profile(user_id).display_name
     except LineBotApiError as e:
-        user_name = event.source.user_id
-
+       user_name = mydict.get("{user_id}", "{user_id}")
+    
     # トーク情報の取得
     if event.source.type == "user":
         msg_type = "個別"
