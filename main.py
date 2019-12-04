@@ -22,9 +22,6 @@ handler = WebhookHandler(CHANNEL_SECRET)
 memberlist = {"U386dbda4eb15a5a528c369f2efb19cbc": "Jukuan", 
               "U6e7ed40306e372bf9fbf8b9ff246247b": "Karen Lai"}
 
-@app.route("/slackpush", methods=['POST'])
-def slack_push():
-
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
