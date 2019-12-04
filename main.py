@@ -19,6 +19,8 @@ POST_CHANEL_ID = os.environ["SLACK_POST_CHANEL_ID"]
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
+mydict = {"U386dbda4eb15a5a528c369f2efb19cbc":"Jukuan",}
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
