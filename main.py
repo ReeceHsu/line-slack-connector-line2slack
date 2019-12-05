@@ -20,7 +20,9 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
 memberlist = {"U386dbda4eb15a5a528c369f2efb19cbc": "Jukuan", 
-              "U6e7ed40306e372bf9fbf8b9ff246247b": "Karen Lai"}
+              "U6e7ed40306e372bf9fbf8b9ff246247b": "Karen Lai"
+              "U7066e302325cdd755ae095c84752646b": "丁丁"
+              }
 
 @app.route("/callback", methods=['POST'])
 def callback():
