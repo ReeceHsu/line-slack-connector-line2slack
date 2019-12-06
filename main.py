@@ -2,9 +2,7 @@ import os
 
 import requests
 import slackweb
-
-from slackeventsapi import SlackEventAdapter
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessage
