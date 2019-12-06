@@ -2,7 +2,9 @@ import os
 
 import requests
 import slackweb
-from flask import Flask, request, abort
+
+from slackeventsapi import SlackEventAdapter
+from flask import Flask, request, abort, jsonify
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessage
@@ -24,6 +26,11 @@ memberlist = {"U386dbda4eb15a5a528c369f2efb19cbc": "Jukuan",
               "U7066e302325cdd755ae095c84752646b": "丁丁",
               "Ua341faf56eae4c42e5793d9c7c2db070": "Jaiden"
               }
+
+@app.route("/echo", method=['POST'])
+def pushSlack():
+    request.headers['Content-Type', 'text/plain']
+    return jsonify(request.json)
 
 @app.route("/callback", methods=['POST'])
 def callback():
