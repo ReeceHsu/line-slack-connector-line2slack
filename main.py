@@ -23,7 +23,8 @@ memberlist = {"U386dbda4eb15a5a528c369f2efb19cbc": "Jukuan",
               "U6e7ed40306e372bf9fbf8b9ff246247b": "Karen Lai",
               "U7066e302325cdd755ae095c84752646b": "丁丁",
               "Ua341faf56eae4c42e5793d9c7c2db070": "Jaiden",
-              "U1f3ff9f8bbc3737eb8a9338fc54b9092": "昀昀"
+              "U1f3ff9f8bbc3737eb8a9338fc54b9092": "昀昀",
+              "U2c9fd4e0ae312db9782043d84cdc54ec": "湯湯"
               }
 
 @app.route("/callback", methods=['POST'])
