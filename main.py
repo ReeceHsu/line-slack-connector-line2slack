@@ -27,11 +27,6 @@ memberlist = {"U386dbda4eb15a5a528c369f2efb19cbc": "Jukuan",
               "Ua341faf56eae4c42e5793d9c7c2db070": "Jaiden"
               }
 
-@app.route("/echo", method=['POST'])
-def pushSlack():
-    request.headers['Content-Type', 'text/plain']
-    return jsonify(request.json)
-
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
