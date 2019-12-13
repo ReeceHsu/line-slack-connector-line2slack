@@ -11,6 +11,7 @@ from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessa
 
 app = Flask(__name__)
 
+
 # 認証情報の取得
 CHANNEL_ACCESS_TOKEN = os.environ["LINE_CHANNEL_ACCESS_TOKEN"]
 CHANNEL_SECRET = os.environ["LINE_CHANNEL_SECRET"]
@@ -51,8 +52,9 @@ def callback():
         event = data['event']
         if ("user" in event) and ("text" in event):
             print("user = ", event["user"])
+            print(os.environ["test"])
             send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"]
-            line_bot_api.reply_message('d25a380f2d984269a60c541adfd82860',TextSendMessage(text=send_msg))
+            #line_bot_api.reply_message('d25a380f2d984269a60c541adfd82860',TextSendMessage(text=send_msg))
        
     if 'events' in data:
       # get X-Line-Signature header value
@@ -117,7 +119,7 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
-    token =  event
+    os.environ["test"] = event
     # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
     # replay_message = event
 
