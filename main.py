@@ -8,20 +8,19 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessage, TextSendMessage
 
-from __future__ import print_function
-from apiclient.discovery import build
-from httplib2 import Http
-from oauth2client import file, client, tools
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
-SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
-store = file.Storage('token.json')
-creds = store.get()
-if not creds or creds.invalid:
-    flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
-    creds = tools.run_flow(flow, store)
-service = build('sheets', 'v4', http=creds.authorize(Http()))
+scope = ['https://spreadsheets.google.com/feeds',
+         'https://www.googleapis.com/auth/drive']
 
+credentials = ServiceAccountCredentials.from_json_keyfile_name('laimo-7db531f7db27.json', scope)
 
+gc = gspread.authorize(credentials)
+
+wks = gc.open("Where is the money Lebowski?").sheet1
+
+print(wks)
 # spreadsheet_id = '1AEJAtCwTQTKKEpQTsUbihNx5cOWq2VQUxN5y93nRsH0'
 # sheetname='sheet'
 # range_ = sheetname+"!A1:B10"
