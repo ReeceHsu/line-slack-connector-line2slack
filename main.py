@@ -34,14 +34,12 @@ slackMemberList = {"UQ1GM24ER": "ユウ/婉君",
               "UPNN12QCA": "Evan",
               "UPQ33SVHR": "空 | Olga" 
               }
-replay_message  = {}
 
 @app.route("/", methods=['POST'])
 def callback():
     
     data = request.data.decode('utf-8')
     data = json.loads(data)
-    # for challenge of slack api
     
     print(data)
     if 'challenge' in data:
@@ -52,25 +50,12 @@ def callback():
         print("get event")
         event = data['event']
         if ("user" in event) and ("text" in event):
-            print("user = ", event["user"])
-            send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
-            print(replay_message)
-            print(send_msg)
-        if "text" in event:
-            print("text = ", event["text"])
+           # print("user = ", event["user"])
+            #send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
+           line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
     if 'events' in data:
       # get X-Line-Signature header value
-      signature = request.headers['X-Line-Signature']
-
-      # get request body as text
-      body = request.get_data(as_text=True)
-      app.logger.info("Request body: " + body)
-    
-      # handle web hook body
-      try:
-        handler.handle(body, signature)
-      except InvalidSignatureError:
-        abort(400)
+      
 
     return Response("nothing", mimetype='text/plane')
 
@@ -123,7 +108,7 @@ def handle_text_message(event):
     # メッセージの送信
 
     # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
-    replay_message = event.reply_token
+    # replay_message = event
 
     slack_info.notify(text=send_msg)
 
