@@ -35,39 +35,42 @@ slackMemberList = {"UQ1GM24ER": "ユウ/婉君",
               "UPQ33SVHR": "空 | Olga" 
               }
 
-@app.route("/callback", methods=['POST'])
+@app.route("/", methods=['POST'])
 def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
-
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
     
-    print(body)
-    print(signature)
-
     data = request.data.decode('utf-8')
     data = json.loads(data)
     # for challenge of slack api
-   
-    # handle web hook body
-    try:
-        if 'challenge' in data:
-          token = str(data['challenge'])
-          return Response(token, mimetype='text/plane')
-        # for events which you added
-        if 'event' in data:
-          print("get event")
-          event = data['event']
+    
+    print(data)
+    if 'challenge' in data:
+        token = str(data['challenge'])
+        return Response(token, mimetype='text/plane')
+    # for events which you added
+    if 'event' in data:
+        print("get event")
+        event = data['event']
         if ("user" in event) and ("text" in event):
+           
             print("user = ", event["user"])
             send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
             line_bot_api.replay_message(event['fb809e1035b34b74ba56ca13a7f08ee5'], TextSendMessage(text=send_msg))
-        if 'events' in data:
-            handler.handle(body, signature)
-   
-    except InvalidSignatureError:
+        if "text" in event:
+            print("text = ", event["text"])
+    if 'events' in data:
+      # get X-Line-Signature header value
+      signature = request.headers['X-Line-Signature']
+
+      # get request body as text
+      body = request.get_data(as_text=True)
+      app.logger.info("Request body: " + body)
+    
+      print(body)
+      print(signature) 
+      # handle web hook body
+      try:
+        handler.handle(body, signature)
+      except InvalidSignatureError:
         abort(400)
 
     return Response("nothing", mimetype='text/plane')
@@ -120,7 +123,7 @@ def handle_text_message(event):
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
 
-    # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
 
     slack_info.notify(text=send_msg)
 
