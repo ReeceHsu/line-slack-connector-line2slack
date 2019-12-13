@@ -56,7 +56,7 @@ def callback():
             with open("token.txt", "r") as f:  #　txt形式の読み込み
               txt = f.read() 
               print(txt)
-            #line_bot_api.reply_message('d25a380f2d984269a60c541adfd82860',TextSendMessage(text=send_msg))
+            line_bot_api.reply_message(txt,TextSendMessage(text=send_msg))
        
     if 'events' in data:
       # get X-Line-Signature header value
