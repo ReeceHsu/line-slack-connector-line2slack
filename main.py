@@ -55,6 +55,7 @@ def callback():
             print("user = ", event["user"])
             send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
             print(replay_message)
+            print(send_msg)
         if "text" in event:
             print("text = ", event["text"])
     if 'events' in data:
@@ -65,8 +66,6 @@ def callback():
       body = request.get_data(as_text=True)
       app.logger.info("Request body: " + body)
     
-      print(body)
-      print(signature) 
       # handle web hook body
       try:
         handler.handle(body, signature)
