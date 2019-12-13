@@ -34,7 +34,6 @@ slackMemberList = {"UQ1GM24ER": "ユウ/婉君",
               "UPNN12QCA": "Evan",
               "UPQ33SVHR": "空 | Olga" 
               }
-token = {}
 
 @app.route("/", methods=['POST'])
 def callback():
@@ -52,7 +51,6 @@ def callback():
         event = data['event']
         if ("user" in event) and ("text" in event):
             print("user = ", event["user"])
-            print(token)
             send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
             line_bot_api.reply_message('1fd88b0464ca43cfb27f47d1823e7b94',TextSendMessage(text=send_msg))
        
