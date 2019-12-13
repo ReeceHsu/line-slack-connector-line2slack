@@ -123,7 +123,7 @@ def handle_text_message(event):
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
 
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
+    # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
 
     slack_info.notify(text=send_msg)
 
