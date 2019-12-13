@@ -40,7 +40,7 @@ def callback():
     
     data = request.data.decode('utf-8')
     data = json.loads(data)
-    
+    print(data)
     print(data)
     if 'challenge' in data:
         token = str(data['challenge'])
@@ -51,12 +51,8 @@ def callback():
         event = data['event']
         if ("user" in event) and ("text" in event):
            # print("user = ", event["user"])
-            #send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
+           send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
-    if 'events' in data:
-      # get X-Line-Signature header value
-      
-
     return Response("nothing", mimetype='text/plane')
 
 
