@@ -5,7 +5,7 @@ import slackweb
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessage
+from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessage, TextSendMessage
 
 app = Flask(__name__)
 
@@ -83,6 +83,14 @@ def get_event_info(event):
         msg_type = "複数トーク"
         room_id = event.source.room_id
         return user_id, user_name, msg_type, room_id
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_text_message(event):
+    # メッセージでもテキストの場合はオウム返しする
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='event.message.text')
+    )
 
 
 @handler.add(MessageEvent, message=TextMessage)
