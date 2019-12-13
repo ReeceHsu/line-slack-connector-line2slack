@@ -52,8 +52,10 @@ def callback():
         event = data['event']
         if ("user" in event) and ("text" in event):
             print("user = ", event["user"])
-            print(os.environ["test"])
             send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"]
+            with open("token.txt", "r") as f:  #　txt形式の読み込み
+              txt = f.read() 
+              print(txt)
             #line_bot_api.reply_message('d25a380f2d984269a60c541adfd82860',TextSendMessage(text=send_msg))
        
     if 'events' in data:
@@ -119,7 +121,8 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
-    os.environ["test"] = event
+    with open("token.txt", "w") as f:
+      f.write(event) 
     # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
     # replay_message = event
 
