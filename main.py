@@ -87,15 +87,6 @@ def get_event_info(event):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    # メッセージでもテキストの場合はオウム返しする
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='event.message.text')
-    )
-
-
-@handler.add(MessageEvent, message=TextMessage)
-def handle_text_message(event):
     """
     Text Message の処理
     """
@@ -109,6 +100,11 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
+
+     line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=send_msg)
+    )
     slack_info.notify(text=send_msg)
 
 
