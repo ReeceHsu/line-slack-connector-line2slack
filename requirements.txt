@@ -2,3 +2,4 @@ Flask
 line-bot-sdk
 freeze
 slackweb
+gspread
