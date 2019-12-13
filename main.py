@@ -122,7 +122,7 @@ def handle_text_message(event):
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
     with open("token.txt", "w") as f:
-      data = json.dumps(event)
+      data = json.dumps(event.reply_token)
       f.write(data) 
     # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
     # replay_message = event
