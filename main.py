@@ -34,13 +34,14 @@ slackMemberList = {"UQ1GM24ER": "ユウ/婉君",
               "UPNN12QCA": "Evan",
               "UPQ33SVHR": "空 | Olga" 
               }
+token = {}
 
 @app.route("/", methods=['POST'])
 def callback():
     
     data = request.data.decode('utf-8')
     data = json.loads(data)
-    print(data)
+    
     print(data)
     if 'challenge' in data:
         token = str(data['challenge'])
@@ -50,9 +51,24 @@ def callback():
         print("get event")
         event = data['event']
         if ("user" in event) and ("text" in event):
-           # print("user = ", event["user"])
-           send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
-           line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
+            print("user = ", event["user"])
+            print(token)
+            send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
+       
+    if 'events' in data:
+      # get X-Line-Signature header value
+      signature = request.headers['X-Line-Signature']
+
+      # get request body as text
+      body = request.get_data(as_text=True)
+      app.logger.info("Request body: " + body)
+    
+      # handle web hook body
+      try:
+        handler.handle(body, signature)
+      except InvalidSignatureError:
+        abort(400)
+
     return Response("nothing", mimetype='text/plane')
 
 
@@ -102,7 +118,7 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
-
+    token =  event
     # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
     # replay_message = event
 
