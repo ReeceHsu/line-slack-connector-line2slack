@@ -34,6 +34,7 @@ slackMemberList = {"UQ1GM24ER": "ユウ/婉君",
               "UPNN12QCA": "Evan",
               "UPQ33SVHR": "空 | Olga" 
               }
+replay_message  = {}
 
 @app.route("/", methods=['POST'])
 def callback():
@@ -54,7 +55,8 @@ def callback():
            
             print("user = ", event["user"])
             send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
-            line_bot_api.replay_message(event['fb809e1035b34b74ba56ca13a7f08ee5'], TextSendMessage(text=send_msg))
+            print(replay_message)
+            # line_bot_api.replay_message(event['fb809e1035b34b74ba56ca13a7f08ee5'], TextSendMessage(text=send_msg))
         if "text" in event:
             print("text = ", event["text"])
     if 'events' in data:
@@ -124,6 +126,7 @@ def handle_text_message(event):
     # メッセージの送信
 
     # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
+    replay_message = event.reply_token
 
     slack_info.notify(text=send_msg)
 
