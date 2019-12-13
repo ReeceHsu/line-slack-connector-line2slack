@@ -51,7 +51,7 @@ def callback():
         event = data['event']
         if ("user" in event) and ("text" in event):
             print("user = ", event["user"])
-            send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
+            send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"]
             line_bot_api.reply_message('1fd88b0464ca43cfb27f47d1823e7b94',TextSendMessage(text=send_msg))
        
     if 'events' in data:
