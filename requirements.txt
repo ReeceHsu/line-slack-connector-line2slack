@@ -3,3 +3,4 @@ line-bot-sdk
 freeze
 slackweb
 gspread
+oauth2client
