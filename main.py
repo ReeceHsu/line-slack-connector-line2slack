@@ -52,11 +52,9 @@ def callback():
         print("get event")
         event = data['event']
         if ("user" in event) and ("text" in event):
-           
             print("user = ", event["user"])
             send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
             print(replay_message)
-            # line_bot_api.replay_message(event['fb809e1035b34b74ba56ca13a7f08ee5'], TextSendMessage(text=send_msg))
         if "text" in event:
             print("text = ", event["text"])
     if 'events' in data:
