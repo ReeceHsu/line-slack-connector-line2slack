@@ -70,7 +70,7 @@ def callback():
     except InvalidSignatureError:
         abort(400)
 
-    return 'OK'
+    return Response("nothing", mimetype='text/plane')
 
 
 def get_event_info(event):
