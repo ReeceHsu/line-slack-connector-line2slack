@@ -8,41 +8,41 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessage, TextSendMessage
 
-from __future__ import print_function
-from apiclient.discovery import build
-from httplib2 import Http
-from oauth2client import file, client, tools
+# from __future__ import print_function
+# from apiclient.discovery import build
+# from httplib2 import Http
+# from oauth2client import file, client, tools
 
-SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
-store = file.Storage('token.json')
-creds = store.get()
-if not creds or creds.invalid:
-    flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
-    creds = tools.run_flow(flow, store)
-service = build('sheets', 'v4', http=creds.authorize(Http()))
+# SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
+# store = file.Storage('token.json')
+# creds = store.get()
+# if not creds or creds.invalid:
+#     flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+#     creds = tools.run_flow(flow, store)
+# service = build('sheets', 'v4', http=creds.authorize(Http()))
 
 
-spreadsheet_id = '1AEJAtCwTQTKKEpQTsUbihNx5cOWq2VQUxN5y93nRsH0'
-sheetname='sheet'
-range_ = sheetname+"!A1:B10"
-v={}
-v['range']=range_
-v['majorDimension']="ROWS"
-v['values']=[
-        [1,  2],
-        [3,  4],
-        [4,  5],
-        [5,  6],
-        [6,  7],
-        [7,  8],
-        [8,  9],
-        [10, 11],
-        [12, 13],
-        ['test', 'スプレッドシートのテストですよ'],
-        ]
-value_input_option = 'USER_ENTERED'
-insert_data_option='OVERWRITE'
-result = service.spreadsheets().values().update( spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=v).execute()
+# spreadsheet_id = '1AEJAtCwTQTKKEpQTsUbihNx5cOWq2VQUxN5y93nRsH0'
+# sheetname='sheet'
+# range_ = sheetname+"!A1:B10"
+# v={}
+# v['range']=range_
+# v['majorDimension']="ROWS"
+# v['values']=[
+#         [1,  2],
+#         [3,  4],
+#         [4,  5],
+#         [5,  6],
+#         [6,  7],
+#         [7,  8],
+#         [8,  9],
+#         [10, 11],
+#         [12, 13],
+#         ['test', 'スプレッドシートのテストですよ'],
+#         ]
+# value_input_option = 'USER_ENTERED'
+# insert_data_option='OVERWRITE'
+# result = service.spreadsheets().values().update( spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=v).execute()
 
 app = Flask(__name__)
 
@@ -88,7 +88,6 @@ def callback():
         if ("user" in event) and ("text" in event):
             print("user = ", event["user"])
             send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"]
-            #line_bot_api.reply_message(txt,TextSendMessage(text=send_msg))
        
     if 'events' in data:
       # get X-Line-Signature header value
