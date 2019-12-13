@@ -7,6 +7,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessage, TextSendMessage
 
+
 app = Flask(__name__)
 
 # 認証情報の取得
