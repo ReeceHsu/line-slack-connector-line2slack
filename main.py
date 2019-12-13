@@ -2,7 +2,8 @@ import os
 
 import requests
 import slackweb
-from flask import Flask, request, abort
+import json
+from flask import Flask, request, abort, Response
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage, ImageMessage, StickerMessage, TextSendMessage
@@ -45,9 +46,27 @@ def callback():
     
     print(body)
     print(signature)
+
+    data = request.data.decode('utf-8')
+    data = json.loads(data)
+    # for challenge of slack api
+   
     # handle web hook body
     try:
-        handler.handle(body, signature)
+        if 'challenge' in data:
+          token = str(data['challenge'])
+          return Response(token, mimetype='text/plane')
+        # for events which you added
+        if 'event' in data:
+          print("get event")
+          event = data['event']
+        if ("user" in event) and ("text" in event):
+            print("user = ", event["user"])
+            send_msg = memberlist.get(event["user"]) + "說\n" + event["text"]
+            line_bot_api.replay_message(event['fb809e1035b34b74ba56ca13a7f08ee5'], TextSendMessage(text=send_msg))
+        if 'events' in data:
+            handler.handle(body, signature)
+   
     except InvalidSignatureError:
         abort(400)
 
@@ -101,8 +120,8 @@ def handle_text_message(event):
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
 
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
-    
+    # line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_msg))
+
     slack_info.notify(text=send_msg)
 
 
