@@ -18,35 +18,12 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name('laimo-7db531f7db
 
 gc = gspread.authorize(credentials)
 
-wks = gc.open("Where is the money Lebowski?").sheet1
+wks = gc.open("laimotalk").sheet1
 
 print(wks)
-# spreadsheet_id = '1AEJAtCwTQTKKEpQTsUbihNx5cOWq2VQUxN5y93nRsH0'
-# sheetname='sheet'
-# range_ = sheetname+"!A1:B10"
-# v={}
-# v['range']=range_
-# v['majorDimension']="ROWS"
-# v['values']=[
-#         [1,  2],
-#         [3,  4],
-#         [4,  5],
-#         [5,  6],
-#         [6,  7],
-#         [7,  8],
-#         [8,  9],
-#         [10, 11],
-#         [12, 13],
-#         ['test', 'スプレッドシートのテストですよ'],
-#         ]
-# value_input_option = 'USER_ENTERED'
-# insert_data_option='OVERWRITE'
-# result = service.spreadsheets().values().update( spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=v).execute()
 
 app = Flask(__name__)
 
-
-# 認証情報の取得
 CHANNEL_ACCESS_TOKEN = os.environ["LINE_CHANNEL_ACCESS_TOKEN"]
 CHANNEL_SECRET = os.environ["LINE_CHANNEL_SECRET"]
 WEB_HOOK_LINKS = os.environ["SLACK_WEB_HOOKS_URL"]
