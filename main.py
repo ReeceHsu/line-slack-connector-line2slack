@@ -148,7 +148,7 @@ def handle_text_message(event):
     print(wks.col_values(1))
     for item in wks.col_values(1):
         print(item)
-        line_bot_api.reply_message(event.reply_token, item)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=item))
     
     #wks.clear()
 
