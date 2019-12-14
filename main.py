@@ -18,7 +18,8 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name('token.json', sco
 
 gc = gspread.authorize(credentials)
 
-wks = gc.open("laimotalk").sheet1
+
+wks = gc.open_by_url("https://docs.google.com/spreadsheets/d/1AEJAtCwTQTKKEpQTsUbihNx5cOWq2VQUxN5y93nRsH0/edit#gid=0").sheet1
 
 print(wks)
 
