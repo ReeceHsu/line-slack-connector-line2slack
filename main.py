@@ -146,18 +146,22 @@ def handle_text_message(event):
     
     slack_info.notify(text=send_msg)
     print(wks.col_values(1))
-    for item in wks.col_values(1):
-        print(item)
+    wkslist = wks.col_values(1)
+    listmsg = []
+    if len(wkslist) >= 5:
+        for i in range(5):
+            listmsg.append(TextSendMessage(text=wks.col_values(1)[i]))
+    else:
+        for item in wks.col_values(1):
+            listmsg.append(TextSendMessage(text=item))
         
-    line_bot_api.reply_message(event.reply_token, [
-        TextSendMessage(text="123"), 
-        TextSendMessage(text="456"),
-        TextSendMessage(text="789"),
-        TextSendMessage(text="987"),
-        TextSendMessage(text="654"),
-        TextSendMessage(text="321")
-        ])
-    #wks.clear()
+    line_bot_api.reply_message(event.reply_token, listmsg)
+    if len(wkslist) >= 5:
+        a = 2
+        #clear data of 5 row
+    else:
+        wks.clear()
+    
 
 
 
