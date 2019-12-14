@@ -134,8 +134,8 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
-    print(type(event.replyToken))
-   
+    #print(type(event.replyToken))
+    line_bot_api.reply_message(event.replyToken, TextSendMessage(text='123'))
     #wks.update_acell('A1', event.replyToken)
     # replay_message = event
    
