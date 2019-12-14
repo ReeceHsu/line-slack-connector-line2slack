@@ -146,7 +146,10 @@ def handle_text_message(event):
     
     slack_info.notify(text=send_msg)
     print(wks.col_values(1))
-    #line_bot_api.reply_message(event.reply_token, wks.col_values(1))
+    for item in wks.col_values(1):
+        print(item)
+        line_bot_api.reply_message(event.reply_token, item)
+    
     #wks.clear()
 
 
