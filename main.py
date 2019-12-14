@@ -95,7 +95,7 @@ def get_event_info(event):
 
     # LINEユーザー名の取得
     #wks.update_acell('A1', event.replyToken.value)
-    print(event.replyToken)
+   
     #line_bot_api.reply_message(event.replyToken, '123')
     user_id = event.source.user_id
     try:
@@ -134,6 +134,7 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
+    print(event)
    
     #wks.update_acell('A1', event.replyToken)
     # replay_message = event
