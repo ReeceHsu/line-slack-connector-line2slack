@@ -66,7 +66,7 @@ def callback():
             print("user = ", event["user"])
             send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"]
             wks.update_acell('A1', send_msg)
-            cell = wks.find("說")
+            cell = wks.findall("說")
             print("Found something at R%sC%s" % (cell.row, cell.col))
             
             #line_bot_api.reply_message(val, TextSendMessage(text=send_msg))
