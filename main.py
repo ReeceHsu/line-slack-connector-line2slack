@@ -20,7 +20,7 @@ gc = gspread.authorize(credentials)
 
 
 wks = gc.open("laimo02").sheet1
-wks.update_acell('A1', 'Hello World!')
+
 
 print(wks)
 
@@ -133,6 +133,7 @@ def handle_text_message(event):
     # メッセージの送信
 
     # replay_message = event
+    wks.update_acell('A1', event)
 
     slack_info.notify(text=send_msg)
 
