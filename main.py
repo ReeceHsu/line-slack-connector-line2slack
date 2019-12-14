@@ -3,6 +3,7 @@ import os
 import requests
 import slackweb
 import json
+import re
 from flask import Flask, request, abort, Response
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
@@ -66,7 +67,8 @@ def callback():
             print("user = ", event["user"])
             send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"]
             wks.update_acell('A1', send_msg)
-            cell = wks.findall("說")
+            amount_re = re.compile(r'說')
+            cell = wks.findall(amount_re)
             print(cell)
             
             #line_bot_api.reply_message(val, TextSendMessage(text=send_msg))
