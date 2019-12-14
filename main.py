@@ -157,7 +157,7 @@ def handle_text_message(event):
         
     line_bot_api.reply_message(event.reply_token, listmsg)
     if len(wkslist) >= 5:
-        a = 2
+        wks.range('A1:A5').clear()
         #clear data of 5 row
     else:
         wks.clear()
