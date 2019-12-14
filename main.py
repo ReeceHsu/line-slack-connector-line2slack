@@ -23,6 +23,7 @@ wks = gc.open("laimo02").sheet1
 
 print(wks)
 
+
 app = Flask(__name__)
 
 CHANNEL_ACCESS_TOKEN = os.environ["LINE_CHANNEL_ACCESS_TOKEN"]
