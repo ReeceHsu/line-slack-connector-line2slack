@@ -157,7 +157,7 @@ def handle_text_message(event):
         
     if len(wkslist) >= 5:
       wks.delete_row(5)
-      wks.resize(rows=1)
+      wks.resize(rows=50)
       print('ok')
       #clear data of 5 row
     else:
