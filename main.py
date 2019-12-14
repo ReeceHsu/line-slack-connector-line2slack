@@ -155,17 +155,16 @@ def handle_text_message(event):
         for item in wks.col_values(1):
             listmsg.append(TextSendMessage(text=item))
         
-    line_bot_api.reply_message(event.reply_token, listmsg)
     if len(wkslist) >= 5:
-        wks.range('A1:A5').clear()
-        #clear data of 5 row
+      wks.range('A1:A5').clear()
+      print('ok')
+      #clear data of 5 row
     else:
-        wks.clear()
+      wks.clear()
+      prink('ook')
+
+    line_bot_api.reply_message(event.reply_token, listmsg)
     
-
-
-
-
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
     """
