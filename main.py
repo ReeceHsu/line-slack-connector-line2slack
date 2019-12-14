@@ -66,11 +66,10 @@ def callback():
         if ("user" in event) and ("text" in event):
             print("user = ", event["user"])
             send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"]
-            wks.update_acell('A1', send_msg)
             amount_re = re.compile(r'說')
             cell = wks.findall(amount_re)
-            print(cell)
-            print(len(cell))
+            finalcell = len(cell) + 1
+            wks.update_acell('A'+finalcell , send_msg)
             
             #line_bot_api.reply_message(val, TextSendMessage(text=send_msg))
        
