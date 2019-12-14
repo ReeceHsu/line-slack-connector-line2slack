@@ -20,6 +20,7 @@ gc = gspread.authorize(credentials)
 
 
 wks = gc.open("laimo02").sheet1
+wks.update_acell('A1', 'Hello World!')
 
 print(wks)
 
