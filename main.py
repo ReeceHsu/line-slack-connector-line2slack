@@ -65,8 +65,11 @@ def callback():
         if ("user" in event) and ("text" in event):
             print("user = ", event["user"])
             send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"]
-            val = wks.acell('A1').value
-            line_bot_api.reply_message(val, TextSendMessage(text=send_msg))
+            wks.update_acell('A1', send_msg)
+            cell = worksheet.find("說")
+            print("Found something at R%sC%s" % (cell.row, cell.col))
+            
+            #line_bot_api.reply_message(val, TextSendMessage(text=send_msg))
        
     if 'events' in data:
       # get X-Line-Signature header value
@@ -134,8 +137,9 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
-    wks.update_acell('A1', event.reply_token)
-    print(event)
+   # wks.update_acell('A1', event.reply_token)
+    #print(event)
+
     # replay_message = event
    
 
