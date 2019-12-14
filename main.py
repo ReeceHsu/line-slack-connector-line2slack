@@ -70,6 +70,7 @@ def callback():
             amount_re = re.compile(r'說')
             cell = wks.findall(amount_re)
             print(cell)
+            print(len(cell))
             
             #line_bot_api.reply_message(val, TextSendMessage(text=send_msg))
        
