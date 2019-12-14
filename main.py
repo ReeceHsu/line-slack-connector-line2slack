@@ -95,7 +95,7 @@ def get_event_info(event):
 
     # LINEユーザー名の取得
     #wks.update_acell('A1', event.replyToken.value)
-    print(event)
+    print(event.replyToken)
     #line_bot_api.reply_message(event.replyToken, '123')
     user_id = event.source.user_id
     try:
