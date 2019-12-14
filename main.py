@@ -55,8 +55,6 @@ def callback():
     
     data = request.data.decode('utf-8')
     data = json.loads(data)
-    
-    print(data)
     if 'challenge' in data:
         token = str(data['challenge'])
         return Response(token, mimetype='text/plane')
