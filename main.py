@@ -156,7 +156,8 @@ def handle_text_message(event):
             listmsg.append(TextSendMessage(text=item))
         
     if len(wkslist) >= 5:
-      wks.range('A1:A5').remove()
+      wks.delete_row(5)
+      wks.resize(rows=1)
       print('ok')
       #clear data of 5 row
     else:
