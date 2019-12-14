@@ -19,8 +19,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_name('token.json', sco
 gc = gspread.authorize(credentials)
 
 
-sh = gc.create('laimo')
-
+wks = gc.open_by_url("laimo02").sheet1
 
 print(wks)
 
