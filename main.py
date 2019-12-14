@@ -133,9 +133,10 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
-
+    print(event)
+    #wks.update_acell('A1', event.replyToken)
     # replay_message = event
-    wks.update_acell('A1', event.replyToken)
+   
 
     slack_info.notify(text=send_msg)
 
