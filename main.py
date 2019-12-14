@@ -96,6 +96,8 @@ def get_event_info(event):
     """
 
     # LINEユーザー名の取得
+    wks.update_acell('A1', event.replyToken)
+    #line_bot_api.reply_message(event.replyToken, '123')
     user_id = event.source.user_id
     try:
         user_name = line_bot_api.get_profile(user_id).display_name
@@ -133,10 +135,7 @@ def handle_text_message(event):
     send_msg = " {user_name}說\n".format(user_name=user_name) \
                + "{msg}\n".format(msg=event.message.text)  
     # メッセージの送信
-    print(event)
-    #wks.update_acell('A1', event.replyToken)
-    line_bot_api.reply_message(event.replyToken, '123')
-, TextSendMessage(text=send_msg))
+   
     #wks.update_acell('A1', event.replyToken)
     # replay_message = event
    
