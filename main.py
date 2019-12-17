@@ -68,7 +68,7 @@ def callback():
         if ("user" in event) and ("text" in event):
             print("user = ", event["user"])
              
-            send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"] + "\n"+  datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime("%Y/%m/%d %H:%M:%S")
+            send_msg = slackMemberList.get(event["user"]) + "說\n" + event["text"] + "\n"+  datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime("%H:%M:%S")
             amount_re = re.compile(r'說')
             cell = wks.findall(amount_re)
             finalcell = len(cell) + 1
