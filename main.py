@@ -161,7 +161,7 @@ def handle_text_message(event):
       wks.resize(rows=50)
       print('ok')
       #clear data of 5 row
-    else:
+    elif len(wkslist) > 0 and len(wkslist) < 5:
       wks.clear()
       print('ook')
 
