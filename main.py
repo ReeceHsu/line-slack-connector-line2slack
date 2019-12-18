@@ -152,7 +152,7 @@ def handle_text_message(event):
     if len(wkslist) >= 5:
         for i in range(5):
             listmsg.append(TextSendMessage(text=wks.col_values(1)[i]))
-    else:
+    elif len(wkslist) > 0 and len(wkslist) < 5:
         for item in wks.col_values(1):
             listmsg.append(TextSendMessage(text=item))
         
